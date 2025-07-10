@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presentación de Proyecto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- VARIABLES Y RESET --- */
+      :root {
+        --color-primario: #1a122a;
+        --color-secundario: #2c2040;
+        --color-terciario: #8c6a7f;
+        --color-texto: #f0f0f0;
+        --color-acento: #ff6b6b;
+        --fuente-principal: "Poppins", sans-serif;
+        --transicion-suave: all 0.3s ease;
+      }
+
+      body.light-mode {
+        --color-primario: #f4f4f9;
+        --color-secundario: #ffffff;
+        --color-terciario: #5a6268;
+        --color-texto: #0d1b2a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--fuente-principal);
+        background-color: var(--color-primario);
+        color: var(--color-texto);
+        line-height: 1.6;
+        transition: var(--transicion-suave);
+      }
+
+      /* --- HEADER Y NAVEGACIÓN --- */
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(44, 32, 64, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--color-terciario);
+        transition: var(--transicion-suave);
+      }
+
+      body.light-mode header {
+        background-color: rgba(255, 255, 255, 0.85);
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--color-acento);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+      }
+
+      nav a {
+        color: var(--color-texto);
+        text-decoration: none;
+        margin-left: 2rem;
+        font-weight: 400;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: var(--color-acento);
+      }
+
+      /* --- INTERRUPTOR MODO CLARO/OSCURO --- */
+      .theme-switch-wrapper {
+        display: flex;
+        align-items: center;
+        margin-left: 2rem;
+      }
+      .theme-switch {
+        display: inline-block;
+        height: 24px;
+        position: relative;
+        width: 50px;
+      }
+      .theme-switch input {
+        display: none;
+      }
+      .slider {
+        background-color: var(--color-terciario);
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        background-color: var(--color-primario);
+        bottom: 4px;
+        content: "";
+        height: 16px;
+        left: 4px;
+        position: absolute;
+        transition: 0.4s;
+        width: 16px;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: var(--color-acento);
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      /* --- ESTILOS GENERALES DE SECCIONES --- */
+      section {
+        min-height: 100vh;
+        padding: 8rem 10% 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px dashed var(--color-secundario);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      h2 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        color: var(--color-texto);
+        font-weight: 600;
+        transition: var(--transicion-suave);
+      }
+
+      h2 span {
+        color: var(--color-acento);
+      }
+
+      p {
+        font-size: 1.1rem;
+        max-width: 700px;
+        color: var(--color-terciario);
+        transition: var(--transicion-suave);
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--color-acento);
+        color: var(--color-primario);
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 2rem;
+        transition: var(--transicion-suave);
+        border: 2px solid transparent;
+      }
+
+      .cta-button:hover {
+        background-color: transparent;
+        border-color: var(--color-acento);
+        color: var(--color-acento);
+        transform: translateY(-3px);
+      }
+
+      /* --- DISEÑO ESPECÍFICO POR SECCIÓN --- */
+
+      #intro {
+        text-align: center;
+      }
+      #intro h2 {
+        font-size: 4rem;
+      }
+      #intro p {
+        font-size: 1.2rem;
+        margin: 0 auto;
+      }
+
+      .layout-dos-columnas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        width: 100%;
+      }
+      .columna-texto {
+        flex: 1;
+      }
+      .columna-placeholder {
+        flex: 1;
+        height: 400px;
+        background-color: var(--color-secundario);
+        border-radius: 10px;
+        border: 2px solid var(--color-terciario);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: italic;
+        transition: var(--transicion-suave);
+      }
+      .columna-placeholder:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(0, 168, 150, 0.1);
+      }
+
+      #detalles,
+      #seccion-6 {
+        background-color: var(--color-secundario);
+      }
+
+      #caracteristicas,
+      #seccion-5,
+      #seccion-7,
+      #seccion-8 {
+        flex-direction: column;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        width: 100%;
+        margin-top: 2rem;
+      }
+      .card {
+        background-color: var(--color-secundario);
+        padding: 2rem;
+        border-radius: 10px;
+        border: 1px solid var(--color-terciario);
+        transition: transform 0.3s ease, border-color 0.3s ease,
+          background-color 0.3s ease;
+        text-align: center;
+      }
+      .card img {
+        width: 100%;
+        height: 200px; /* Altura fija para uniformidad */
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        border-color: var(--color-acento);
+        background-color: var(--color-texto);
+        color: var(--color-primario);
+      }
+      .card:hover h3 {
+        color: var(--color-acento);
+      }
+      .card:hover p {
+        color: var(--color-secundario);
+      }
+      .card h3 {
+        color: var(--color-acento);
+        margin-bottom: 1rem;
+      }
+
+      /* SECCIÓN 5: TIMELINE */
+      .timeline {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin-top: 2rem;
+      }
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background-color: var(--color-acento);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+      }
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+      }
+      .timeline-item.left {
+        left: 0;
+      }
+      .timeline-item.right {
+        left: 50%;
+      }
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        background-color: var(--color-primario);
+        border: 4px solid var(--color-acento);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      .timeline-item.right::after {
+        left: -10px;
+      }
+      .timeline-content {
+        padding: 20px 30px;
+        background-color: var(--color-secundario);
+        position: relative;
+        border-radius: 6px;
+      }
+
+      /* SECCIÓN 7: GRID 2x2 */
+      .grid-2x2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        width: 100%;
+      }
+
+      /* SECCIÓN 8: FAQ con Acordeón */
+      .acordeon-item {
+        background-color: var(--color-secundario);
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid var(--color-terciario);
+      }
+      .acordeon-titulo {
+        padding: 15px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+      }
+      .acordeon-contenido {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 15px;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--color-secundario);
+        font-size: 0.9rem;
+        color: var(--color-terciario);
+        transition: var(--transicion-suave);
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 768px) {
+        h2 {
+          font-size: 2.5rem;
+        }
+        #intro h2 {
+          font-size: 3rem;
+        }
+        .layout-dos-columnas,
+        .grid-2x2 {
+          flex-direction: column;
+          grid-template-columns: 1fr;
+        }
+        nav a {
+          display: none;
+        } /* Simplificando para el ejemplo */
+        .timeline::after {
+          left: 15px;
+        }
+        .timeline-item {
+          width: 100%;
+          padding-left: 50px;
+          padding-right: 10px;
+        }
+        .timeline-item.left::after,
+        .timeline-item.right::after {
+          left: 5px;
+        }
+        .timeline-item.right {
+          left: 0%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="1.png"
+          alt="Logo FA"
+          style="height: 40px; vertical-align: middle"
+        />
+      </div>
+      <nav>
+        <a href="#intro">Inicio</a>
+        <a href="#info-general">Concepto</a>
+        <a href="#detalles">Contacto</a>
+        <a href="#caracteristicas">Zonas</a>
+        <a href="#seccion-5">Experiencia</a>
+        <a href="#seccion-7">Visual</a>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- SECCIÓN 1: INTRODUCCIÓN -->
+      <section id="intro">
+        <div class="contenido">
+          <h2>Bienvenidos a <span>FA</span></h2>
+          <p>
+            FA es un engranaje visual. Y vos sos la chispa que lo activa.<br />
+            Nada está quieto, pero nada se mueve sin vos.<br />
+            Cada zona que desbloqueás, cada pieza que encajás, pone en marcha el
+            sistema.<br />
+            No venís a buscar quién sos. Venís a activar lo que FA tiene listo
+            para mostrarte.<br />
+            <b>Se arma, se conecta, se enciende.</b>
+          </p>
+          <a href="#info-general" class="cta-button">Inicia ahora</a>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: CONCEPTO -->
+      <section id="info-general">
+        <div class="layout-dos-columnas">
+          <div class="columna-texto">
+            <h2>Concepto y <span>Visión</span></h2>
+            <p>
+              Es un sistema visual que se activa con tus acciones. La identidad
+              se construye paso a paso, con cada pieza que encajás
+              correctamente. Un recorrido guiado donde cada movimiento
+              desbloquea el siguiente nivel. Cada zona que se activa, cada pieza
+              que encajás, pone en movimiento una parte. Y al final, la suma de
+              esas acciones hace girar el sistema → como un engranaje completo
+              funcionando.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: PRIMER CONTACTO -->
+      <section id="detalles">
+        <div class="layout-dos-columnas">
+          <div class="columna-texto">
+            <h2>Primer <span>Contacto</span></h2>
+            <p>
+              El usuario recibe una caja física intervenida a mano con recortes,
+              acrílico y stickers. Al abrirla, encuentra una carta: "FA está en
+              pausa. Vos sos la señal".
+            </p>
+            <p><b>Contenido de la caja:</b></p>
+            <ul style="list-style-position: inside; padding-left: 1rem">
+              <li>Taza FA con frase oculta.</li>
+              <li>Saquito de té: "Esto no es un break, es un boot."</li>
+              <li>CD de acceso: "Acceso concedido. Usuario FA_xx1"</li>
+              <li>Vela artesanal: "Prendé. Encendé FA."</li>
+              <li>Stickers con frases como "Estás dentro."</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4: LAS ZONAS -->
+      <section id="caracteristicas">
+        <div style="text-align: center">
+          <h2>EXPERIENCIA.<span>ZONAS</span></h2>
+          <p>
+            El corazón de la experiencia. Tres desafíos para activar el sistema.
+          </p>
+        </div>
+        <div class="grid-container">
+          <div class="card">
+            <h3>ZONA 1</h3>
+            <img src="zona-1.jpg"/>
+            <p>
+              Sala rectangular, cerrada, estilo caja negra. Tamaño: Mediana.
+              Suficiente para caminar un poco, pero que se vea todo de un
+              vistazo. Piso: Negro, con reflejos o una textura ligeramente
+              espejada. Como con un material con specular alto para simular
+              brillo(sin tener que meter reflejos reales). Paredes: Planas,
+              oscuras (gris profundo o negro) Luz: Un único foco de luz blanca
+              desde arriba, apuntando al centro. El resto es tenue, con algo de
+              luz ambiente azul o violeta muy baja. En el centro se encuentran
+              pantallas rotas. 4 pantallas rotas muestran loops visuales, mini
+              clips o imagenes. Como un storyboard roto El objetivo, el Usuario
+              debe: * Reordenar pantallas para generar una animación fluida. *
+              Cuando lo logra, se forma una animación breve que representa el
+              servicio video,motion de la agencia Aparece la cámara FA (objeto)
+              que se llevara el Usuario para pasar a la zona 2 y se desbloquea
+              una frase: “Solo cuando todo encaja, la historia se mueve.”
+              Acompañado con techno glitch El usuario se lleva objeto
+              desbloqueado para pasar a la zona 2
+            </p>
+          </div>
+          <div class="card">
+            <h3>ZONA 2 </h3>
+            <img src="zona-2.jpg"/>
+            <p>
+              Un mundo digital fragmentado. Códigos flotan en el aire, teclas de
+              teclado giran, y una pantalla gigante dice: “404: Identidad no
+              encontrada.” El usuario debe: * Reconectar partes de una interfaz
+              web arrastrando elementos visuales (botones, íconos, menú). * En
+              pantalla hay un diseño de web roto (una maqueta con espacios
+              vacíos tipo wireframe o grilla). * Tiene que arrastrar y soltar
+              cada pieza en su lugar correcto. * Cuando están todos bien
+              colocados, se reconstruye la web, se prende la pantalla gigante
+              con la animación web FA Termina con la frase “La identidad también
+              es código” Todo el espacio acompañado de musica intelligent dance
+              music El usuario se llevara con el el segundo objeto que
+              desbloqueara la zona 3 para ingresar
+            </p>
+          </div>
+          <div class="card">
+            <h3>ZONA 3</h3>
+            <img src="zona-3.jpg"/>
+            <p>
+              Un mundo digital fragmentado. Códigos flotan en el aire, teclas de
+              teclado giran, y una pantalla gigante dice: “404: Identidad no
+              encontrada.” El usuario debe: * Reconectar partes de una interfaz
+              web arrastrando elementos visuales (botones, íconos, menú). * En
+              pantalla hay un diseño de web roto (una maqueta con espacios
+              vacíos tipo wireframe o grilla). * Tiene que arrastrar y soltar
+              cada pieza en su lugar correcto. * Cuando están todos bien
+              colocados, se reconstruye la web, se prende la pantalla gigante
+              con la animación web FA Termina con la frase “La identidad también
+              es código” Todo el espacio acompañado de musica intelligent dance
+              music El usuario se llevara con el el segundo objeto que
+              desbloqueara la zona 3 para ingresar
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: LA EXPERIENCIA -->
+      <section id="seccion-5">
+        <div style="text-align: center">
+          <h2>La <span>Experiencia</span></h2>
+          <p>Un recorrido desde el inicio hasta la revelación final.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <h3>INICIO Y DESPERTAR</h3>
+              <p>
+                El juego comienza en un entorno abstracto: una sala vacía,
+                envuelta en niebla blanca con un leve ruido ambiente. En el
+                centro flota un texto: “Identidad cargando… sistema esperando
+                señal” Una luz tenue apunta al usuario. Al caminar hacia ella,
+                el suelo se enciende con colores FA (rosa, violetas, naranjas,
+                blanco). La niebla se disipa y aparece frente a él el mundo de
+                FA: un espacio 3D geométrico, saturado de collages, texturas
+                intensas, 3D, luces y pantallas flotantes.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <h3>EXPLORACIÓN</h3>
+              <p>
+                El usuario avanza de una zona a la otra. Al completar una zona,
+                el jugador recoge un objeto, que reactiva e ilumina un nuevo
+                camino
+                <br />
+                * Entra por la Zona 1, termina el desafío, se abre un
+                túnel/pasarela y automáticamente avanza a la siguiente zona, sin
+                volver al centro.
+                <br />
+                * Cuando termina las 3 zonas, recién ahí vuelve al centro, ahora
+                transformado, con todos los objetos girando a su alrededor (como
+                si lo que recorrió hubiera sido una proyección desde ahí)
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <h3>SALA FINAL</h3>
+              <p>
+                Una vez recolectados los 3 objetos, el usuario es transportado a
+                una sala circular. Todo lo que construyó se muestra animado:
+                 <br />
+                  *Las frases flotan a su alrededor. 
+                 <br />
+                 * Los objetos aparecen
+                suspendidos y giran en un loop. En el centro, una pantalla en
+                blanco espera… Identidad cargada, sistema listo para mostrarse
+                Frase final proyectada: FA: Lo que fuiste viendo ya estaba en
+                vos
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 7: VISUAL EXTRA -->
+      <section id="seccion-7">
+        <div class="layout-dos-columnas">
+          <div class="columna-texto">
+            <h2>Universo <span>Visual</span></h2>
+            <p>
+              La estética de FA es una mezcla de collage, texturas intensas, 3D,
+              luces de neón y elementos geométricos. Cada rincón está diseñado
+              para ser una experiencia visual única e inmersiva, donde la
+              identidad de la marca se siente en cada pixel.
+            </p>
+          </div>
+          <div class="columna-placeholder">
+            <img
+              src="4.jpg"
+              alt="Universo Visual FA"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+              "
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Presentado por Erica Denis</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- SCRIPT PARA ANIMACIÓN AL HACER SCROLL ---
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          }
+        );
+
+        document.querySelectorAll("section").forEach((section) => {
+          observer.observe(section);
+        });
+
+        // --- SCRIPT PARA MODO CLARO/OSCURO ---
+        const themeSwitch = document.getElementById("checkbox");
+        themeSwitch.addEventListener("change", () => {
+          document.body.classList.toggle("light-mode");
+          if (document.body.classList.contains("light-mode")) {
+            localStorage.setItem("theme", "light");
+          } else {
+            localStorage.setItem("theme", "dark");
+          }
+        });
+
+        const currentTheme = localStorage.getItem("theme");
+        if (currentTheme === "light") {
+          document.body.classList.add("light-mode");
+          themeSwitch.checked = true;
+        }
+
+        // --- SCRIPT PARA ACORDEÓN FAQ ---
+        const acordeonTitulos = document.querySelectorAll(".acordeon-titulo");
+        acordeonTitulos.forEach((titulo) => {
+          titulo.addEventListener("click", () => {
+            const contenido = titulo.nextElementSibling;
+            const item = titulo.parentElement;
+
+            if (item.classList.contains("active")) {
+              item.classList.remove("active");
+              contenido.style.maxHeight = null;
+              contenido.style.padding = "0 15px";
+            } else {
+              // Opcional: cerrar otros items abiertos
+              // acordeonTitulos.forEach(t => {
+              //     t.parentElement.classList.remove('active');
+              //     t.nextElementSibling.style.maxHeight = null;
+              //     t.nextElementSibling.style.padding = '0 15px';
+              // });
+
+              item.classList.add("active");
+              contenido.style.maxHeight = contenido.scrollHeight + "px";
+              contenido.style.padding = "15px";
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
